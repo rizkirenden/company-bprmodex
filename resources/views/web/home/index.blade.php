@@ -2,566 +2,1526 @@
 
 @section('title', 'FinBank - Solusi Keuangan Digital Masa Depan')
 
-@section('meta_description', 'Nikmati layanan perbankan digital terbaik dengan keamanan tingkat tinggi, bunga
+@section('meta_description',
+    'Nikmati layanan perbankan digital terbaik dengan keamanan tingkat tinggi, bunga
     kompetitif, dan kemudahan transaksi 24/7.')
 
+    @push('styles')
+        <style>
+            /* ==================== */
+            /* HERO CAROUSEL OPTIMIZED */
+            /* ==================== */
+            .hero-carousel {
+                height: 75vh;
+                min-height: 550px;
+                border-radius: 0 0 0 180px;
+                overflow: hidden;
+                position: relative;
+                box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.3);
+                z-index: 1;
+            }
+
+            /* Fade transition untuk slide - lebih smooth */
+            .carousel-slide {
+                transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+                will-change: opacity;
+            }
+
+            /* Overlay gradient yang lebih halus */
+            .carousel-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg,
+                        rgba(0, 0, 0, 0.55) 0%,
+                        rgba(0, 0, 0, 0.35) 50%,
+                        rgba(0, 0, 0, 0.2) 100%);
+                z-index: 10;
+            }
+
+            /* Logo di kiri carousel */
+            .carousel-logo {
+                position: absolute;
+                bottom: 35px;
+                left: 35px;
+                z-index: 25;
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                background: rgba(255, 255, 255, 0.12);
+                backdrop-filter: blur(12px);
+                padding: 10px 24px;
+                border-radius: 60px;
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                pointer-events: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .carousel-logo img {
+                height: 42px;
+                width: auto;
+                filter: brightness(0) invert(1);
+            }
+
+            .carousel-logo span {
+                color: white;
+                font-weight: 600;
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            }
+
+            /* ========== CURVE OVERLAY ========== */
+            .carousel-curve-container {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 320px;
+                height: 320px;
+                z-index: 15;
+                pointer-events: none;
+                overflow: hidden;
+            }
+
+            .carousel-curve-glow {
+                position: absolute;
+                bottom: -100px;
+                left: -100px;
+                width: 260px;
+                height: 260px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+                border-radius: 50%;
+                filter: blur(15px);
+                z-index: 16;
+            }
+
+            .carousel-curve-white {
+                position: absolute;
+                bottom: -70px;
+                left: -70px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 50%;
+                filter: blur(12px);
+                z-index: 17;
+            }
+
+            .carousel-curve-gradient {
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 160px;
+                height: 160px;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+                border-radius: 50%;
+                z-index: 18;
+            }
+
+            /* Navigation Buttons */
+            .carousel-nav-btn {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 30;
+            }
+
+            .carousel-nav-btn:hover {
+                transform: translateY(-50%) scale(1.1);
+                background: rgba(255, 255, 255, 0.35);
+            }
+
+            /* Dots */
+            .dot {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .dot.active {
+                width: 28px;
+                background: white;
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            }
+
+            /* ==================== */
+            /* TAB NAVIGATION STYLES */
+            /* ==================== */
+            .info-section {
+                width: 100%;
+                background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+                padding: 2rem 0 3rem;
+            }
+
+            .tab-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-bottom: 2rem;
+                padding: 0 1rem;
+            }
+
+            .tab-btn {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.95rem;
+                font-weight: 600;
+                border: none;
+                background: white;
+                color: #64748b;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-radius: 50px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+
+            .tab-btn:hover {
+                transform: translateY(-2px);
+            }
+
+            .tab-btn.active {
+                color: white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            .tab-btn.promo.active {
+                background: #d97706;
+            }
+
+            .tab-btn.berita.active {
+                background: #2563eb;
+            }
+
+            .tab-btn.pemberitahuan.active {
+                background: #4f46e5;
+            }
+
+            .tab-btn.waspada.active {
+                background: #dc2626;
+            }
+
+            .tab-btn.promo:hover {
+                color: #d97706;
+                background: #fef3c7;
+            }
+
+            .tab-btn.berita:hover {
+                color: #2563eb;
+                background: #dbeafe;
+            }
+
+            .tab-btn.pemberitahuan:hover {
+                color: #4f46e5;
+                background: #e0e7ff;
+            }
+
+            .tab-btn.waspada:hover {
+                color: #dc2626;
+                background: #fee2e2;
+            }
+
+            .tab-content {
+                display: none;
+                animation: fadeIn 0.5s ease;
+            }
+
+            .tab-content.active {
+                display: block;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .info-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .info-card {
+                background: white;
+                border-radius: 1rem;
+                overflow: hidden;
+                transition: all 0.35s ease;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                cursor: pointer;
+                border: 1px solid #e2e8f0;
+            }
+
+            .info-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+            }
+
+            .card-image {
+                width: 100%;
+                height: 160px;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            .info-card:hover .card-image {
+                transform: scale(1.05);
+            }
+
+            .image-container {
+                overflow: hidden;
+                position: relative;
+            }
+
+            .card-badge {
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                padding: 0.25rem 0.75rem;
+                border-radius: 20px;
+                font-size: 0.7rem;
+                font-weight: 600;
+            }
+
+            .badge-promo {
+                background: #fef3c7;
+                color: #d97706;
+            }
+
+            .badge-news {
+                background: #dbeafe;
+                color: #2563eb;
+            }
+
+            .badge-info {
+                background: #e0e7ff;
+                color: #4f46e5;
+            }
+
+            .badge-warning {
+                background: #fee2e2;
+                color: #dc2626;
+            }
+
+            .card-content {
+                padding: 1rem;
+            }
+
+            .card-title {
+                font-size: 1rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            .card-desc {
+                font-size: 0.8rem;
+                color: #64748b;
+                margin-bottom: 0.75rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .card-date {
+                font-size: 0.7rem;
+                color: #94a3b8;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .readmore-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #2563eb;
+                transition: all 0.3s ease;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+            }
+
+            .readmore-link:hover {
+                color: #1d4ed8;
+                gap: 0.75rem;
+            }
+
+            .readmore-link i {
+                font-size: 0.7rem;
+                transition: transform 0.3s ease;
+            }
+
+            .readmore-link:hover i {
+                transform: translateX(3px);
+            }
+
+            .tab-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .tab-header h2 {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: #1e293b;
+            }
+
+            .tab-header-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: #2563eb;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+            .tab-header-link:hover {
+                color: #1d4ed8;
+                gap: 0.75rem;
+            }
+
+            /* Products */
+            .products-container {
+                width: 100%;
+                position: relative;
+                z-index: 2;
+                background: linear-gradient(to bottom, #ffffff, #f8fafc);
+            }
+
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0;
+                width: 100%;
+                margin: 0;
+            }
+
+            .product-card {
+                transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                border-radius: 0;
+                position: relative;
+                z-index: 1;
+            }
+
+            .product-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+                z-index: 10;
+                background: white;
+            }
+
+            .product-icon {
+                transition: all 0.3s ease;
+            }
+
+            .product-card:hover .product-icon {
+                transform: scale(1.05);
+            }
+
+            .product-button {
+                transition: all 0.3s ease;
+            }
+
+            .product-button:hover {
+                background: #2563eb;
+                color: white;
+                transform: translateY(-2px);
+            }
+
+            .product-card:not(:last-child) {
+                border-right: 1px solid #e2e8f0;
+            }
+
+            /* ==================== */
+            /* ABOUT SECTION - FULL WIDTH DI BAWAH */
+            /* ==================== */
+            .about-full-section {
+                width: 100%;
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .about-full-container {
+                max-width: 1400px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                gap: 0;
+            }
+
+            .about-full-content {
+                flex: 1;
+                padding: 4rem 3rem;
+                color: white;
+            }
+
+            .about-full-title {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: white;
+                line-height: 1.3;
+                margin-bottom: 1.5rem;
+            }
+
+            .about-full-title span {
+                color: #60a5fa;
+                position: relative;
+            }
+
+            .about-full-title span::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(90deg, #60a5fa, #3b82f6);
+                border-radius: 3px;
+            }
+
+            .about-full-description {
+                color: #cbd5e1;
+                font-size: 1rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+            }
+
+            .about-full-features {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+                margin-bottom: 2rem;
+            }
+
+            .about-full-feature {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .feature-full-icon {
+                width: 44px;
+                height: 44px;
+                background: rgba(59, 130, 246, 0.15);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #60a5fa;
+                font-size: 1.2rem;
+                transition: all 0.3s ease;
+            }
+
+            .about-full-feature:hover .feature-full-icon {
+                background: #3b82f6;
+                color: white;
+                transform: scale(1.05);
+            }
+
+            .feature-full-text h4 {
+                font-size: 1rem;
+                font-weight: 700;
+                color: white;
+                margin-bottom: 0.25rem;
+            }
+
+            .feature-full-text p {
+                font-size: 0.8rem;
+                color: #94a3b8;
+            }
+
+            .about-full-cta {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.9rem 2rem;
+                background: linear-gradient(135deg, #3b82f6, #2563eb);
+                color: white;
+                font-weight: 600;
+                border-radius: 50px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            }
+
+            .about-full-cta:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+                gap: 1rem;
+            }
+
+            .about-full-image {
+                flex: 1;
+                position: relative;
+                min-height: 550px;
+                overflow: hidden;
+            }
+
+            .about-full-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .image-overlay-stats {
+                position: absolute;
+                bottom: 40px;
+                right: 40px;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 1.25rem 1.75rem;
+                border-radius: 1rem;
+                box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .stat-item {
+                text-align: center;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+                font-weight: 800;
+                color: #1e293b;
+                line-height: 1;
+            }
+
+            .stat-number span {
+                font-size: 1rem;
+                font-weight: 500;
+                color: #64748b;
+            }
+
+            .stat-label {
+                font-size: 0.7rem;
+                color: #64748b;
+                font-weight: 500;
+                margin-top: 0.25rem;
+            }
+
+            .stat-divider {
+                width: 1px;
+                height: 40px;
+                background: #e2e8f0;
+            }
+
+            /* ==================== */
+            /* PARTNERS / KERJASAMA SECTION - MARQUEE */
+            /* ==================== */
+            .partners-section {
+                width: 100%;
+                background: white;
+                padding: 3rem 0;
+                overflow: hidden;
+                border-top: 1px solid #e2e8f0;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .partners-header {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .partners-title {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #1e293b;
+                margin-bottom: 0.5rem;
+            }
+
+            .partners-subtitle {
+                font-size: 0.9rem;
+                color: #64748b;
+            }
+
+            /* Marquee Animation */
+            .marquee-container {
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .marquee-track {
+                display: flex;
+                align-items: center;
+                gap: 4rem;
+                animation: marquee 25s linear infinite;
+                width: max-content;
+            }
+
+            .marquee-track:hover {
+                animation-play-state: paused;
+            }
+
+            @keyframes marquee {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+
+            .partner-logo {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-width: 140px;
+                padding: 1rem;
+                transition: all 0.3s ease;
+                opacity: 0.7;
+            }
+
+            .partner-logo:hover {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            .partner-logo img {
+                height: 60px;
+                width: auto;
+                object-fit: contain;
+                filter: grayscale(100%);
+                transition: filter 0.3s ease;
+            }
+
+            .partner-logo:hover img {
+                filter: grayscale(0%);
+            }
+
+            .partner-name {
+                font-size: 0.7rem;
+                color: #94a3b8;
+                margin-top: 0.5rem;
+                text-align: center;
+            }
+
+            /* Responsive */
+            @media (max-width: 1024px) {
+                .about-full-container {
+                    flex-direction: column;
+                }
+
+                .about-full-content {
+                    padding: 3rem 2rem;
+                }
+
+                .about-full-image {
+                    width: 100%;
+                    min-height: 400px;
+                }
+
+                .about-full-image img {
+                    position: relative;
+                    height: 400px;
+                    object-fit: cover;
+                }
+
+                .info-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .hero-carousel {
+                    height: 65vh;
+                    border-radius: 0 0 0 80px;
+                }
+
+                .carousel-logo {
+                    bottom: 20px;
+                    left: 20px;
+                    padding: 6px 16px;
+                }
+
+                .carousel-logo img {
+                    height: 28px;
+                }
+
+                .products-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .product-card:not(:last-child) {
+                    border-right: none;
+                    border-bottom: 1px solid #e2e8f0;
+                }
+
+                .about-full-features {
+                    grid-template-columns: 1fr;
+                }
+
+                .about-full-title {
+                    font-size: 1.8rem;
+                }
+
+                .image-overlay-stats {
+                    bottom: 20px;
+                    right: 20px;
+                    left: 20px;
+                    padding: 1rem;
+                    gap: 1rem;
+                }
+
+                .stat-number {
+                    font-size: 1.3rem;
+                }
+
+                .tab-btn {
+                    padding: 0.5rem 1rem;
+                    font-size: 0.75rem;
+                }
+
+                .info-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .partner-logo {
+                    min-width: 100px;
+                }
+
+                .partner-logo img {
+                    height: 40px;
+                }
+
+                .marquee-track {
+                    gap: 2rem;
+                    animation-duration: 20s;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .hero-carousel {
+                    height: 60vh;
+                    border-radius: 0 0 0 50px;
+                }
+
+                .carousel-logo span {
+                    display: none;
+                }
+
+                .image-overlay-stats {
+                    flex-direction: column;
+                    gap: 0.75rem;
+                    text-align: center;
+                }
+
+                .stat-divider {
+                    display: none;
+                }
+
+                .partners-title {
+                    font-size: 1.2rem;
+                }
+            }
+        </style>
+    @endpush
+
 @section('content')
-    <style>
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-        }
-
-        .wave svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 80px;
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-    </style>
-
-    <!-- Hero Section -->
-    <section id="home"
-        class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 pt-20">
-        <div class="absolute inset-0 opacity-30">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-300 rounded-full filter blur-3xl animate-pulse"></div>
-            <div
-                class="absolute bottom-20 right-10 w-96 h-96 bg-indigo-300 rounded-full filter blur-3xl animate-pulse delay-1000">
-            </div>
+    <!-- Hero Carousel Section -->
+    <section id="home" class="hero-carousel relative w-full bg-slate-900">
+        <div class="carousel-curve-container">
+            <div class="carousel-curve-glow"></div>
+            <div class="carousel-curve-white"></div>
+            <div class="carousel-curve-gradient"></div>
+        </div>
+        <div class="carousel-overlay"></div>
+        <div class="carousel-logo">
+            <img src="{{ asset('assets/logo4.png') }}" alt="FinBank Logo">
+            <span>FinBank</span>
         </div>
 
-        <div class="container mx-auto px-6 md:px-10 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8">
-                    <div class="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full">
-                        <span class="w-2 h-2 bg-blue-600 rounded-full mr-2 animate-pulse"></span>
-                        <span class="text-blue-700 text-sm font-semibold">#1 Digital Banking di Indonesia</span>
-                    </div>
-                    <h1
-                        class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent animate-gradient">
-                        Masa Depan Keuangan Ada di Sini
-                    </h1>
-                    <p class="text-xl text-gray-600 leading-relaxed">
-                        Kelola keuangan Anda dengan mudah, aman, dan cerdas. Nikmati berbagai fitur unggulan untuk mendukung
-                        gaya hidup modern Anda.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-5">
-                        <a href="#contact"
-                            class="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full font-semibold overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                            <span class="relative z-10">Buka Rekening Gratis</span>
-                            <i
-                                class="fas fa-arrow-right ml-2 relative z-10 group-hover:translate-x-1 transition-transform"></i>
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left">
-                            </div>
-                        </a>
-                        <a href="#services"
-                            class="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300">
-                            <i class="fas fa-play-circle mr-2"></i>
-                            Lihat Layanan
-                        </a>
-                    </div>
-
-                    <div class="flex items-center space-x-8 pt-6">
-                        <div class="flex -space-x-3">
-                            <div
-                                class="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full border-2 border-white flex items-center justify-center text-white font-bold">
-                                A</div>
-                            <div
-                                class="w-12 h-12 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-full border-2 border-white flex items-center justify-center text-white font-bold">
-                                B</div>
-                            <div
-                                class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full border-2 border-white flex items-center justify-center text-white font-bold">
-                                C</div>
-                        </div>
-                        <div>
-                            <p class="text-gray-700 font-semibold">Dipercaya 5+ Juta Nasabah</p>
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="text-gray-600 ml-2">4.8/5</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative lg:block hidden">
-                    <div
-                        class="relative rounded-3xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                        <img src="https://placehold.co/600x500/0891b2/white?text=Mobile+Banking+App"
-                            alt="Mobile Banking App" class="w-full">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                    </div>
-                    <div
-                        class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl flex items-center space-x-3 animate-bounce">
-                        <i class="fas fa-check-circle text-green-500 text-2xl"></i>
-                        <div>
-                            <p class="font-bold">Transaksi Aman</p>
-                            <p class="text-sm text-gray-500">100% Terenkripsi</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="carousel-slide absolute top-0 left-0 w-full h-full opacity-0" data-slide="0">
+            <img src="{{ asset('assets/test0.jpg') }}" alt="Slide 1"
+                class="absolute top-0 left-0 w-full h-full object-cover">
+        </div>
+        <div class="carousel-slide absolute top-0 left-0 w-full h-full opacity-0" data-slide="1">
+            <img src="{{ asset('assets/test1.jpg') }}" alt="Slide 2"
+                class="absolute top-0 left-0 w-full h-full object-cover">
+        </div>
+        <div class="carousel-slide absolute top-0 left-0 w-full h-full opacity-0" data-slide="2">
+            <img src="{{ asset('assets/test2.jpg') }}" alt="Slide 3"
+                class="absolute top-0 left-0 w-full h-full object-cover">
+        </div>
+        <div class="carousel-slide absolute top-0 left-0 w-full h-full opacity-0" data-slide="3">
+            <img src="{{ asset('assets/test3.jpg') }}" alt="Slide 4"
+                class="absolute top-0 left-0 w-full h-full object-cover">
         </div>
 
-        <div class="wave">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path
-                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                    class="fill-white"></path>
-            </svg>
-        </div>
-    </section>
+        <button
+            class="carousel-nav-btn prev absolute top-1/2 -translate-y-1/2 left-5 md:left-8 w-11 h-11 md:w-12 md:h-12 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/25 transition-all duration-300 hover:bg-white/35 hover:scale-110"
+            id="prevBtn">
+            <i class="fas fa-chevron-left text-white text-sm md:text-base"></i>
+        </button>
+        <button
+            class="carousel-nav-btn next absolute top-1/2 -translate-y-1/2 right-5 md:right-8 w-11 h-11 md:w-12 md:h-12 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/25 transition-all duration-300 hover:bg-white/35 hover:scale-110"
+            id="nextBtn">
+            <i class="fas fa-chevron-right text-white text-sm md:text-base"></i>
+        </button>
 
-    <!-- About Section with Wave -->
-    <section id="about" class="relative py-24 bg-white">
-        <div class="container mx-auto px-6 md:px-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Tentang Kami</span>
-                <h2
-                    class="text-4xl md:text-5xl font-bold mt-4 mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                    Inovasi Tanpa Batas untuk Keuangan Anda
-                </h2>
-                <p class="text-gray-600 text-lg leading-relaxed">
-                    FinBank hadir sebagai solusi perbankan digital yang menggabungkan keamanan tingkat tinggi dengan
-                    kemudahan akses modern.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-8 rounded-2xl bg-gradient-to-b from-gray-50 to-white card-hover">
-                    <div
-                        class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <i class="fas fa-shield-alt text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Keamanan Terjamin</h3>
-                    <p class="text-gray-600">Sistem keamanan berlapis dengan enkripsi end-to-end dan proteksi fraud 24/7.
-                    </p>
-                </div>
-                <div
-                    class="text-center p-8 rounded-2xl bg-gradient-to-b from-gray-50 to-white card-hover transform md:translate-y-8">
-                    <div
-                        class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <i class="fas fa-bolt text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Transaksi Cepat</h3>
-                    <p class="text-gray-600">Proses transaksi real-time dengan teknologi high-frequency processing.</p>
-                </div>
-                <div class="text-center p-8 rounded-2xl bg-gradient-to-b from-gray-50 to-white card-hover">
-                    <div
-                        class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <i class="fas fa-headset text-3xl text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">Customer Support 24/7</h3>
-                    <p class="text-gray-600">Dukungan pelanggan siap membantu Anda kapan saja melalui berbagai channel.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="relative py-24 bg-gradient-to-br from-gray-50 to-blue-50 overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-400 rounded-full filter blur-3xl"></div>
-        </div>
-
-        <div class="container mx-auto px-6 md:px-10 relative">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Layanan Unggulan</span>
-                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6">Solusi Lengkap Kebutuhan Finansial</h2>
-                <p class="text-gray-600 text-lg">Dari perbankan sehari-hari hingga investasi jangka panjang, kami siap
-                    membantu.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @php
-                    $services = [
-                        [
-                            'icon' => 'mobile-alt',
-                            'title' => 'Mobile Banking',
-                            'desc' => 'Akses rekening kapan saja dengan aplikasi mobile canggih.',
-                            'color' => 'blue',
-                        ],
-                        [
-                            'icon' => 'chart-line',
-                            'title' => 'Investasi',
-                            'desc' => 'Berbagai pilihan investasi dengan return kompetitif.',
-                            'color' => 'purple',
-                        ],
-                        [
-                            'icon' => 'hand-holding-usd',
-                            'title' => 'Pinjaman Online',
-                            'desc' => 'Proses cepat, bunga rendah, tanpa agunan.',
-                            'color' => 'indigo',
-                        ],
-                        [
-                            'icon' => 'credit-card',
-                            'title' => 'Kartu Kredit',
-                            'desc' => 'Nikmati berbagai promo dan cashback menarik.',
-                            'color' => 'green',
-                        ],
-                        [
-                            'icon' => 'shield-alt',
-                            'title' => 'Asuransi',
-                            'desc' => 'Perlindungan menyeluruh untuk diri dan keluarga.',
-                            'color' => 'red',
-                        ],
-                        [
-                            'icon' => 'globe',
-                            'title' => 'Remitansi',
-                            'desc' => 'Kirim uang ke luar negeri dengan kurs terbaik.',
-                            'color' => 'orange',
-                        ],
-                    ];
-                @endphp
-
-                @foreach ($services as $service)
-                    <div class="group bg-white rounded-2xl p-8 card-hover cursor-pointer">
-                        <div
-                            class="w-14 h-14 bg-{{ $service['color'] }}-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <i class="fas fa-{{ $service['icon'] }} text-2xl text-{{ $service['color'] }}-600"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">{{ $service['title'] }}</h3>
-                        <p class="text-gray-600 mb-4">{{ $service['desc'] }}</p>
-                        <a href="#contact"
-                            class="text-{{ $service['color'] }}-600 font-semibold inline-flex items-center group-hover:translate-x-2 transition-transform">
-                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+        <div class="carousel-dots absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30"
+            id="carouselDots">
+            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="0"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="1"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="2"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="3"></div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-24 bg-white">
-        <div class="container mx-auto px-6 md:px-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Produk Pilihan</span>
-                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6">Rekomendasi Terbaik untuk Anda</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="group relative overflow-hidden rounded-3xl shadow-xl card-hover">
-                    <img src="https://placehold.co/600x400/2563eb/white?text=Tabungan+Plus" alt="Tabungan Plus"
-                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-8 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Tabungan Plus</h3>
-                        <p class="mb-4">Bunga hingga 5% per tahun, bebas biaya admin</p>
-                        <a href="#contact"
-                            class="inline-flex items-center text-white font-semibold border-b-2 border-white pb-1 hover:gap-2 transition-all">
-                            Pelajari <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="group relative overflow-hidden rounded-3xl shadow-xl card-hover">
-                    <img src="https://placehold.co/600x400/7c3aed/white?text=Deposito+Emas" alt="Deposito Emas"
-                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-8 text-white">
-                        <h3 class="text-2xl font-bold mb-2">Deposito Emas</h3>
-                        <p class="mb-4">Imbal hasil menggiurkan hingga 7% per tahun</p>
-                        <a href="#contact"
-                            class="inline-flex items-center text-white font-semibold border-b-2 border-white pb-1 hover:gap-2 transition-all">
-                            Pelajari <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section with Stats -->
-    <section id="features" class="relative py-24 bg-gray-900 text-white overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
-        </div>
-
-        <div class="container mx-auto px-6 md:px-10 relative">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <span class="text-blue-400 font-semibold text-sm uppercase tracking-wider">Keunggulan Kami</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6">Kenapa Memilih FinBank?</h2>
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div
-                                class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-check-circle text-blue-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-1">Tanpa Biaya Tersembunyi</h3>
-                                <p class="text-gray-300">Transparansi penuh tanpa biaya administrasi yang membebani.</p>
-                            </div>
+    <div class="products-container">
+        <div class="products-grid">
+            <div class="product-card bg-white transition-all duration-300 group overflow-hidden flex flex-col cursor-pointer"
+                onclick="showProductDetail('kredit')">
+                <div class="flex items-center p-6 md:p-8 gap-5 flex-1">
+                    <div class="flex-shrink-0">
+                        <div
+                            class="product-icon w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
+                            <i class="fas fa-credit-card text-white text-2xl md:text-3xl"></i>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div
-                                class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-lock text-blue-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-1">Keamanan Berlapis</h3>
-                                <p class="text-gray-300">Verifikasi 2 faktor dan sistem deteksi fraud canggih.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div
-                                class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-charging-station text-blue-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-1">Akses 24/7</h3>
-                                <p class="text-gray-300">Layanan tersedia setiap saat melalui berbagai platform.</p>
-                            </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-slate-800 text-xl md:text-2xl">Kredit</h3>
+                        <p class="text-slate-500 text-sm md:text-base mt-1">Konsumtif & Modal Kerja</p>
+                        <div class="mt-3 flex flex-wrap items-center gap-2">
+                            <span class="text-emerald-600 text-sm font-semibold">✓ Bunga 6,5%</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-slate-500 text-sm">Limit Rp10M</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-slate-500 text-sm">Tenor 10 th</span>
                         </div>
                     </div>
                 </div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 pt-2">
+                    <button
+                        class="product-button w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group/btn">
+                        Pelajari Selengkapnya
+                        <i
+                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                    </button>
+                </div>
+            </div>
 
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center card-hover">
-                        <i class="fas fa-users text-4xl text-blue-400 mb-3"></i>
-                        <div class="text-3xl font-bold">5M+</div>
-                        <p class="text-gray-300">Nasabah Aktif</p>
+            <div class="product-card bg-white transition-all duration-300 group overflow-hidden flex flex-col cursor-pointer"
+                onclick="showProductDetail('dana')">
+                <div class="flex items-center p-6 md:p-8 gap-5 flex-1">
+                    <div class="flex-shrink-0">
+                        <div
+                            class="product-icon w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
+                            <i class="fas fa-hand-holding-usd text-white text-2xl md:text-3xl"></i>
+                        </div>
                     </div>
-                    <div
-                        class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center card-hover transform translate-y-4">
-                        <i class="fas fa-chart-line text-4xl text-blue-400 mb-3"></i>
-                        <div class="text-3xl font-bold">Rp 50T+</div>
-                        <p class="text-gray-300">Total Aset</p>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-slate-800 text-xl md:text-2xl">Tabungan & Deposito</h3>
+                        <p class="text-slate-500 text-sm md:text-base mt-1">Simpanan & Investasi</p>
+                        <div class="mt-3 flex flex-wrap items-center gap-2">
+                            <span class="text-emerald-600 text-sm font-semibold">✓ Bunga 7,5%</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-slate-500 text-sm">Gratis admin</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-slate-500 text-sm">Setoran Rp100rb</span>
+                        </div>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center card-hover">
-                        <i class="fas fa-mobile-alt text-4xl text-blue-400 mb-3"></i>
-                        <div class="text-3xl font-bold">99.9%</div>
-                        <p class="text-gray-300">Uptime</p>
+                </div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 pt-2">
+                    <button
+                        class="product-button w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group/btn">
+                        Pelajari Selengkapnya
+                        <i
+                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card bg-white transition-all duration-300 group overflow-hidden flex flex-col cursor-pointer"
+                onclick="showProductDetail('atm')">
+                <div class="flex items-center p-6 md:p-8 gap-5 flex-1">
+                    <div class="flex-shrink-0">
+                        <div
+                            class="product-icon w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
+                            <i class="fas fa-credit-card text-white text-2xl md:text-3xl"></i>
+                        </div>
                     </div>
-                    <div
-                        class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center card-hover transform translate-y-4">
-                        <i class="fas fa-star text-4xl text-blue-400 mb-3"></i>
-                        <div class="text-3xl font-bold">4.8/5</div>
-                        <p class="text-gray-300">Rating Kepuasan</p>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-slate-800 text-xl md:text-2xl">ATM & Debit</h3>
+                        <p class="text-slate-500 text-sm md:text-base mt-1">Transaksi Mudah</p>
+                        <div class="mt-3 flex flex-wrap items-center gap-2">
+                            <span class="text-emerald-600 text-sm font-semibold">✓ Bebas biaya</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-slate-500 text-sm">Proteksi 24 jam</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-slate-500 text-sm">Lock/unlock</span>
+                        </div>
                     </div>
+                </div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 pt-2">
+                    <button
+                        class="product-button w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group/btn">
+                        Pelajari Selengkapnya
+                        <i
+                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div class="container mx-auto px-6 md:px-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Testimoni</span>
-                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6">Apa Kata Nasabah Kami</h2>
+    <!-- INFO SECTION (Promosi, Berita, Pemberitahuan, Waspada) -->
+    @php
+        $categories = [
+            [
+                'id' => 1,
+                'name' => 'Promosi',
+                'slug' => 'promo',
+                'icon' => 'fa-gift',
+                'badge_class' => 'badge-promo',
+                'color' => 'promo',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Berita',
+                'slug' => 'berita',
+                'icon' => 'fa-newspaper',
+                'badge_class' => 'badge-news',
+                'color' => 'berita',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Pemberitahuan',
+                'slug' => 'pemberitahuan',
+                'icon' => 'fa-bell',
+                'badge_class' => 'badge-info',
+                'color' => 'pemberitahuan',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Waspada',
+                'slug' => 'waspada',
+                'icon' => 'fa-shield-alt',
+                'badge_class' => 'badge-warning',
+                'color' => 'waspada',
+            ],
+        ];
+
+        $items = [
+            1 => [
+                [
+                    'id' => 1,
+                    'title' => 'Deposito Bunga 8% Khusus Akhir Tahun',
+                    'desc' => 'Dapatkan bunga spesial 8% untuk deposito 12 bulan.',
+                    'date' => '1 Nov - 31 Des 2024',
+                    'badge' => 'Promo Terbatas',
+                    'image' => 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'Cashback 10% Transaksi E-commerce',
+                    'desc' => 'Nikmati cashback 10% untuk setiap transaksi belanja online.',
+                    'date' => '1 Nov - 30 Nov 2024',
+                    'badge' => 'Cashback',
+                    'image' => 'https://images.unsplash.com/photo-1556742031-c6961e8561b0?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'Undian Berhadiah Umroh & Motor Listrik',
+                    'desc' => 'Setiap transaksi minimal Rp500rb otomatis mengikuti undian.',
+                    'date' => '1 Okt - 31 Des 2024',
+                    'badge' => 'Hadiah',
+                    'image' => 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'Ajak Teman Dapat Bonus Rp500rb',
+                    'desc' => 'Ajak teman buka rekening, dapatkan bonus tunai.',
+                    'date' => 'Sepanjang Tahun 2024',
+                    'badge' => 'Referral',
+                    'image' => 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=200&fit=crop',
+                ],
+            ],
+            2 => [
+                [
+                    'id' => 1,
+                    'title' => 'FinBank Raih Penghargaan Bank Digital Terbaik 2024',
+                    'desc' => 'FinBank dinobatkan sebagai Bank Digital Terbaik.',
+                    'date' => '15 November 2024',
+                    'badge' => 'Penghargaan',
+                    'image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'FinBank Buka Kantor Cabang ke-100 di Surabaya',
+                    'desc' => 'Ekspansi layanan untuk menjangkau lebih banyak nasabah.',
+                    'date' => '10 November 2024',
+                    'badge' => 'Ekspansi',
+                    'image' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'Fitur Biometrik Wajah Hadir di Mobile Banking',
+                    'desc' => 'Keamanan transaksi semakin canggih.',
+                    'date' => '5 November 2024',
+                    'badge' => 'Fitur Baru',
+                    'image' => 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'FinBank Kerjasama dengan 100+ Merchant',
+                    'desc' => 'Perluas jaringan merchant untuk kemudahan transaksi.',
+                    'date' => '1 November 2024',
+                    'badge' => 'Kerjasama',
+                    'image' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop',
+                ],
+            ],
+            3 => [
+                [
+                    'id' => 1,
+                    'title' => 'Jadwal Pemeliharaan Server 24 November 2024',
+                    'desc' => 'Layanan Mobile Banking akan terganggu pukul 02.00 - 04.00 WIB.',
+                    'date' => '24 November 2024',
+                    'badge' => 'Pemeliharaan',
+                    'image' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'Pembaruan Aplikasi Mobile Banking Versi 4.0',
+                    'desc' => 'Update aplikasi untuk pengalaman transaksi lebih cepat.',
+                    'date' => '20 November 2024',
+                    'badge' => 'Update Fitur',
+                    'image' => 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'Penyesuaian Suku Bunga Kredit per Desember',
+                    'desc' => 'Informasi penting untuk nasabah kredit.',
+                    'date' => '1 Desember 2024',
+                    'badge' => 'Perubahan',
+                    'image' => 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'Operasional Bank Libur Natal & Tahun Baru',
+                    'desc' => 'Informasi jadwal operasional kantor cabang.',
+                    'date' => '24 Des - 1 Jan 2025',
+                    'badge' => 'Libur Nasional',
+                    'image' => 'https://images.unsplash.com/photo-1415369629372-26f2fe60c467?w=400&h=200&fit=crop',
+                ],
+            ],
+            4 => [
+                [
+                    'id' => 1,
+                    'title' => 'Waspada Modus Penipuan Mengatasnamakan Bank',
+                    'desc' => 'Jangan pernah memberikan OTP, PIN, atau informasi pribadi.',
+                    'date' => 'Update: 15 November 2024',
+                    'badge' => 'Penipuan',
+                    'image' => 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'Awas! Link Palsu Mengatasnamakan FinBank',
+                    'desc' => 'Jangan klik link mencurigakan untuk update data.',
+                    'date' => 'Update: 10 November 2024',
+                    'badge' => 'Link Phishing',
+                    'image' => 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 3,
+                    'title' => 'Waspada Telepon Mengaku Customer Service',
+                    'desc' => 'FinBank tidak pernah meminta informasi via telepon.',
+                    'date' => 'Update: 5 November 2024',
+                    'badge' => 'Telepon',
+                    'image' => 'https://images.unsplash.com/photo-1596526131083-a8c633c980d9?w=400&h=200&fit=crop',
+                ],
+                [
+                    'id' => 4,
+                    'title' => 'Modus Penipuan Baru Menggunakan AI Voice',
+                    'desc' => 'Waspada modus penipuan dengan suara mirip pegawai bank.',
+                    'date' => 'Update: 1 November 2024',
+                    'badge' => 'AI Voice',
+                    'image' => 'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&h=200&fit=crop',
+                ],
+            ],
+        ];
+    @endphp
+
+    <div class="info-section">
+        <div class="tab-buttons">
+            @foreach ($categories as $index => $cat)
+                <button class="tab-btn {{ $cat['color'] }} {{ $loop->first ? 'active' : '' }}"
+                    data-tab="{{ $cat['slug'] }}">
+                    <i class="fas {{ $cat['icon'] }} mr-2"></i> {{ $cat['name'] }}
+                </button>
+            @endforeach
+        </div>
+
+        @foreach ($categories as $index => $cat)
+            <div class="tab-content {{ $loop->first ? 'active' : '' }}" id="tab-{{ $cat['slug'] }}">
+                <div class="tab-header">
+                    <h2>{{ $cat['name'] }} Terbaru</h2>
+                    <a href="{{ url('/' . $cat['slug']) }}" class="tab-header-link">
+                        Lihat Semua {{ $cat['name'] }} <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="info-grid">
+                    @foreach ($items[$cat['id']] as $item)
+                        <div class="info-card" onclick="goToDetail('{{ $cat['slug'] }}', {{ $item['id'] }})">
+                            <div class="image-container">
+                                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="card-image">
+                                <span class="card-badge {{ $cat['badge_class'] }}">
+                                    <i class="fas {{ $cat['icon'] }} mr-1"></i> {{ $item['badge'] }}
+                                </span>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">{{ $item['title'] }}</h3>
+                                <p class="card-desc">{{ $item['desc'] }}</p>
+                                <div class="card-date"><i class="far fa-calendar-alt"></i> {{ $item['date'] }}</div>
+                                <button class="readmore-link"
+                                    onclick="event.stopPropagation(); goToDetail('{{ $cat['slug'] }}', {{ $item['id'] }})">
+                                    Selengkapnya <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
+        @endforeach
+    </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                @php
-                    $testimonials = [
-                        [
-                            'name' => 'Budi Santoso',
-                            'role' => 'Pengusaha',
-                            'text' =>
-                                'FinBank sangat membantu mengembangkan bisnis saya. Proses pinjaman cepat dan bunga bersaing.',
-                            'rating' => 5,
-                        ],
-                        [
-                            'name' => 'Dewi Lestari',
-                            'role' => 'Karyawan Swasta',
-                            'text' =>
-                                'Aplikasinya mudah digunakan, transaksi lancar, dan fitur investasinya sangat menguntungkan.',
-                            'rating' => 5,
-                        ],
-                        [
-                            'name' => 'Andi Wijaya',
-                            'role' => 'Freelancer',
-                            'text' =>
-                                'Customer service responsif, keamanan terjamin. FinBank pilihan tepat untuk digital banking.',
-                            'rating' => 5,
-                        ],
-                    ];
-                @endphp
+    <!-- ABOUT SECTION - FULL WIDTH -->
+    <div class="about-full-section">
+        <div class="about-full-container">
+            <div class="about-full-content">
+                <h2 class="about-full-title">
+                    Solusi Keuangan Digital<br>Untuk <span>Masa Depan Anda</span>
+                </h2>
+                <p class="about-full-description">
+                    FinBank hadir sebagai solusi perbankan digital terdepan yang menggabungkan teknologi modern
+                    dengan pelayanan prima. Kami berkomitmen untuk memberikan kemudahan akses keuangan bagi
+                    seluruh lapisan masyarakat Indonesia.
+                </p>
 
-                @foreach ($testimonials as $testimonial)
-                    <div class="bg-white rounded-2xl p-8 shadow-xl card-hover relative">
-                        <i class="fas fa-quote-left text-4xl text-blue-200 absolute top-6 right-6"></i>
-                        <div class="flex items-center mb-6">
-                            <div
-                                class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                                {{ substr($testimonial['name'], 0, 1) }}
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-bold text-lg">{{ $testimonial['name'] }}</h4>
-                                <p class="text-gray-500 text-sm">{{ $testimonial['role'] }}</p>
-                            </div>
+                <div class="about-full-features">
+                    <div class="about-full-feature">
+                        <div class="feature-full-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="feature-full-text">
+                            <h4>Keamanan Terjamin</h4>
+                            <p>Sistem enkripsi berlapis & proteksi 24 jam</p>
                         </div>
-                        <div class="flex text-yellow-400 mb-4">
-                            @for ($i = 0; $i < $testimonial['rating']; $i++)
-                                <i class="fas fa-star"></i>
-                            @endfor
-                        </div>
-                        <p class="text-gray-600 leading-relaxed">"{{ $testimonial['text'] }}"</p>
                     </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+                    <div class="about-full-feature">
+                        <div class="feature-full-icon"><i class="fas fa-clock"></i></div>
+                        <div class="feature-full-text">
+                            <h4>Layanan 24/7</h4>
+                            <p>Akses transaksi kapan saja, di mana saja</p>
+                        </div>
+                    </div>
+                    <div class="about-full-feature">
+                        <div class="feature-full-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="feature-full-text">
+                            <h4>Fitur Digital Lengkap</h4>
+                            <p>Mobile banking & internet banking canggih</p>
+                        </div>
+                    </div>
+                    <div class="about-full-feature">
+                        <div class="feature-full-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div class="feature-full-text">
+                            <h4>Bunga Kompetitif</h4>
+                            <p>Produk simpanan & kredit terbaik</p>
+                        </div>
+                    </div>
+                    <div class="about-full-feature">
+                        <div class="feature-full-icon"><i class="fas fa-users"></i></div>
+                        <div class="feature-full-text">
+                            <h4>5+ Juta Nasabah</h4>
+                            <p>Dipercaya oleh jutaan masyarakat Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="about-full-feature">
+                        <div class="feature-full-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="feature-full-text">
+                            <h4>Terlisensi & Terdaftar</h4>
+                            <p>Resmi & diawasi oleh OJK</p>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- CTA Section -->
-    <section class="relative py-24 bg-gradient-to-r from-blue-600 to-blue-800">
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-0 left-0 w-72 h-72 bg-white rounded-full filter blur-3xl"></div>
-        </div>
-        <div class="container mx-auto px-6 md:px-10 text-center relative">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Siap Memulai Perjalanan Finansial Anda?</h2>
-            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Bergabunglah dengan 5+ juta nasabah yang sudah
-                merasakan kemudahan bertransaksi dengan FinBank.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact"
-                    class="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
-                    Buka Rekening <i class="fas fa-arrow-right ml-2"></i>
+                <a href="#" class="about-full-cta">
+                    Selengkapnya Tentang FinBank
+                    <i class="fas fa-arrow-right"></i>
                 </a>
-                <a href="#contact"
-                    class="inline-flex items-center px-8 py-4 border-2 border-white text-white rounded-full font-semibold hover:bg-white/10 transition-all duration-300">
-                    <i class="fab fa-whatsapp mr-2"></i>
-                    Hubungi Kami
-                </a>
             </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-white">
-        <div class="container mx-auto px-6 md:px-10">
-            <div class="grid lg:grid-cols-2 gap-16">
-                <div>
-                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Hubungi Kami</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6">Ada Pertanyaan?<br>Kami Siap Membantu</h2>
-                    <div class="space-y-6">
-                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-2xl">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-phone-alt text-blue-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-sm">Telepon</p>
-                                <p class="font-semibold text-lg">1500-123</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-2xl">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-envelope text-blue-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-sm">Email</p>
-                                <p class="font-semibold text-lg">care@finbank.co.id</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-2xl">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fab fa-whatsapp text-blue-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-gray-500 text-sm">WhatsApp</p>
-                                <p class="font-semibold text-lg">+62 812-3456-7890</p>
-                            </div>
-                        </div>
+            <div class="about-full-image">
+                <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                    alt="FinBank Modern Office">
+                <div class="image-overlay-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10+ <span>Tahun</span></div>
+                        <div class="stat-label">Pengalaman</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Kantor Cabang</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number">5M+</div>
+                        <div class="stat-label">Nasabah</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div>
-                    <form action="#" method="POST" class="space-y-6 bg-gray-50 p-8 rounded-3xl">
-                        @csrf
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap</label>
-                            <input type="text"
-                                class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Email</label>
-                            <input type="email"
-                                class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">No. Telepon</label>
-                            <input type="tel"
-                                class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Pesan</label>
-                            <textarea rows="4"
-                                class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"></textarea>
-                        </div>
-                        <button type="submit"
-                            class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
-                            Kirim Pesan
-                        </button>
-                    </form>
+    <!-- PARTNERS / KERJASAMA SECTION - MARQUEE BERJALAN -->
+    <div class="partners-section">
+        <div class="partners-header">
+            <h3 class="partners-title">🤝 Mitra Kerjasama FinBank</h3>
+            <p class="partners-subtitle">Bergabung dengan lebih dari 500+ perusahaan terpercaya</p>
+        </div>
+
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <!-- Logo 1 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Logo_Pertamina.svg/2560px-Logo_Pertamina.svg.png"
+                        alt="Pertamina">
+                    <span class="partner-name">Pertamina</span>
+                </div>
+                <!-- Logo 2 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Logo_Telkom_Indonesia.svg/2560px-Logo_Telkom_Indonesia.svg.png"
+                        alt="Telkom Indonesia">
+                    <span class="partner-name">Telkom Indonesia</span>
+                </div>
+                <!-- Logo 3 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Logo_PLN.svg/2560px-Logo_PLN.svg.png"
+                        alt="PLN">
+                    <span class="partner-name">PLN</span>
+                </div>
+                <!-- Logo 4 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bank_Mandiri_logo.svg/2560px-Bank_Mandiri_logo.svg.png"
+                        alt="Bank Mandiri">
+                    <span class="partner-name">Bank Mandiri</span>
+                </div>
+                <!-- Logo 5 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BRI_logo.svg/2560px-BRI_logo.svg.png"
+                        alt="BRI">
+                    <span class="partner-name">BRI</span>
+                </div>
+                <!-- Logo 6 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Gojek_logo_2019.svg/2560px-Gojek_logo_2019.svg.png"
+                        alt="Gojek">
+                    <span class="partner-name">Gojek</span>
+                </div>
+                <!-- Logo 7 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Grab_logo.svg/2560px-Grab_logo.svg.png"
+                        alt="Grab">
+                    <span class="partner-name">Grab</span>
+                </div>
+                <!-- Logo 8 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Shopee_logo.svg/2560px-Shopee_logo.svg.png"
+                        alt="Shopee">
+                    <span class="partner-name">Shopee</span>
+                </div>
+                <!-- Logo 9 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Logo_Unilever.svg/2560px-Logo_Unilever.svg.png"
+                        alt="Unilever">
+                    <span class="partner-name">Unilever</span>
+                </div>
+                <!-- Logo 10 -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Astra_International_logo.svg/2560px-Astra_International_logo.svg.png"
+                        alt="Astra">
+                    <span class="partner-name">Astra</span>
+                </div>
+
+                <!-- Duplikasi untuk efek infinite -->
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Logo_Pertamina.svg/2560px-Logo_Pertamina.svg.png"
+                        alt="Pertamina">
+                    <span class="partner-name">Pertamina</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Logo_Telkom_Indonesia.svg/2560px-Logo_Telkom_Indonesia.svg.png"
+                        alt="Telkom Indonesia">
+                    <span class="partner-name">Telkom Indonesia</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Logo_PLN.svg/2560px-Logo_PLN.svg.png"
+                        alt="PLN">
+                    <span class="partner-name">PLN</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bank_Mandiri_logo.svg/2560px-Bank_Mandiri_logo.svg.png"
+                        alt="Bank Mandiri">
+                    <span class="partner-name">Bank Mandiri</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BRI_logo.svg/2560px-BRI_logo.svg.png"
+                        alt="BRI">
+                    <span class="partner-name">BRI</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Gojek_logo_2019.svg/2560px-Gojek_logo_2019.svg.png"
+                        alt="Gojek">
+                    <span class="partner-name">Gojek</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Grab_logo.svg/2560px-Grab_logo.svg.png"
+                        alt="Grab">
+                    <span class="partner-name">Grab</span>
+                </div>
+                <div class="partner-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Shopee_logo.svg/2560px-Shopee_logo.svg.png"
+                        alt="Shopee">
+                    <span class="partner-name">Shopee</span>
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
 @endsection
 
 @push('scripts')
     <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let autoPlayInterval;
+        const autoPlayDelay = 6000;
+
+        function updateCarousel() {
+            slides.forEach((slide, index) => {
+                if (index === currentIndex) {
+                    slide.style.opacity = '1';
+                    slide.style.zIndex = '10';
+                } else {
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '1';
                 }
+            });
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                    dot.style.width = '28px';
+                    dot.style.borderRadius = '14px';
+                    dot.style.backgroundColor = 'white';
+                    dot.style.boxShadow = '0 0 8px rgba(255,255,255,0.5)';
+                } else {
+                    dot.classList.remove('active');
+                    dot.style.width = '8px';
+                    dot.style.borderRadius = '50%';
+                    dot.style.backgroundColor = 'rgba(255,255,255,0.5)';
+                    dot.style.boxShadow = 'none';
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        function showProductDetail(product) {
+            window.location.href = '/produk/' + product;
+        }
+
+        function goToDetail(category, id) {
+            window.location.href = '/' + category + '/' + id;
+        }
+
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(`tab-${tabId}`).classList.add('active');
             });
         });
 
-        // Intersection Observer untuk animasi
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        if (nextBtn && prevBtn) {
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+        }
 
-        document.querySelectorAll('section, .card-hover').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.7s ease-out';
-            observer.observe(el);
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+                resetAutoPlay();
+            });
         });
+
+        const heroSection = document.getElementById('home');
+        if (heroSection) {
+            heroSection.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            heroSection.addEventListener('mouseleave', startAutoPlay);
+        }
+
+        if (slides[0]) {
+            slides[0].style.opacity = '1';
+            slides[0].style.zIndex = '10';
+        }
+        if (dots[0]) {
+            dots[0].style.width = '28px';
+            dots[0].style.borderRadius = '14px';
+            dots[0].style.backgroundColor = 'white';
+            dots[0].style.boxShadow = '0 0 8px rgba(255,255,255,0.5)';
+        }
+
+        startAutoPlay();
     </script>
 @endpush
