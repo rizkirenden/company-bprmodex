@@ -8,70 +8,16 @@
 
     @push('styles')
         <style>
-            /* ==================== */
-            /* HERO CAROUSEL OPTIMIZED */
-            /* ==================== */
+            /* Custom styles that are hard to do with Tailwind */
             .hero-carousel {
-                height: 75vh;
-                min-height: 550px;
                 border-radius: 0 0 0 180px;
-                overflow: hidden;
-                position: relative;
-                box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.3);
-                z-index: 1;
             }
 
-            /* Fade transition untuk slide - lebih smooth */
             .carousel-slide {
                 transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
                 will-change: opacity;
             }
 
-            /* Overlay gradient yang lebih halus */
-            .carousel-overlay {
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(135deg,
-                        rgba(0, 0, 0, 0.55) 0%,
-                        rgba(0, 0, 0, 0.35) 50%,
-                        rgba(0, 0, 0, 0.2) 100%);
-                z-index: 10;
-            }
-
-            /* Logo di kiri carousel */
-            .carousel-logo {
-                position: absolute;
-                bottom: 35px;
-                left: 35px;
-                z-index: 25;
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                background: rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(12px);
-                padding: 10px 24px;
-                border-radius: 60px;
-                border: 1px solid rgba(255, 255, 255, 0.25);
-                pointer-events: none;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            }
-
-            .carousel-logo img {
-                height: 42px;
-                width: auto;
-                filter: brightness(0) invert(1);
-            }
-
-            .carousel-logo span {
-                color: white;
-                font-weight: 600;
-                font-size: 1.2rem;
-                letter-spacing: 1px;
-                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            }
-
-            /* ========== CURVE OVERLAY ========== */
             .carousel-curve-container {
                 position: absolute;
                 bottom: 0;
@@ -118,562 +64,6 @@
                 z-index: 18;
             }
 
-            /* Navigation Buttons */
-            .carousel-nav-btn {
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 30;
-            }
-
-            .carousel-nav-btn:hover {
-                transform: translateY(-50%) scale(1.1);
-                background: rgba(255, 255, 255, 0.35);
-            }
-
-            /* Dots */
-            .dot {
-                transition: all 0.3s ease;
-                cursor: pointer;
-            }
-
-            .dot.active {
-                width: 28px;
-                background: white;
-                box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-            }
-
-            /* ==================== */
-            /* TAB NAVIGATION STYLES */
-            /* ==================== */
-            .info-section {
-                width: 100%;
-                background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
-                padding: 2rem 0 3rem;
-            }
-
-            .tab-buttons {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.5rem;
-                margin-bottom: 2rem;
-                padding: 0 1rem;
-            }
-
-            .tab-btn {
-                padding: 0.75rem 1.75rem;
-                font-size: 0.95rem;
-                font-weight: 600;
-                border: none;
-                background: white;
-                color: #64748b;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border-radius: 50px;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            }
-
-            .tab-btn:hover {
-                transform: translateY(-2px);
-            }
-
-            .tab-btn.active {
-                color: white;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            }
-
-            .tab-btn.promo.active {
-                background: #d97706;
-            }
-
-            .tab-btn.berita.active {
-                background: #2563eb;
-            }
-
-            .tab-btn.pemberitahuan.active {
-                background: #4f46e5;
-            }
-
-            .tab-btn.waspada.active {
-                background: #dc2626;
-            }
-
-            .tab-btn.promo:hover {
-                color: #d97706;
-                background: #fef3c7;
-            }
-
-            .tab-btn.berita:hover {
-                color: #2563eb;
-                background: #dbeafe;
-            }
-
-            .tab-btn.pemberitahuan:hover {
-                color: #4f46e5;
-                background: #e0e7ff;
-            }
-
-            .tab-btn.waspada:hover {
-                color: #dc2626;
-                background: #fee2e2;
-            }
-
-            .tab-content {
-                display: none;
-                animation: fadeIn 0.5s ease;
-            }
-
-            .tab-content.active {
-                display: block;
-            }
-
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(10px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .info-grid {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 1.5rem;
-                width: 100%;
-                padding: 0 1rem;
-            }
-
-            .info-card {
-                background: white;
-                border-radius: 1rem;
-                overflow: hidden;
-                transition: all 0.35s ease;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-                cursor: pointer;
-                border: 1px solid #e2e8f0;
-            }
-
-            .info-card:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
-            }
-
-            .card-image {
-                width: 100%;
-                height: 160px;
-                object-fit: cover;
-                transition: transform 0.5s ease;
-            }
-
-            .info-card:hover .card-image {
-                transform: scale(1.05);
-            }
-
-            .image-container {
-                overflow: hidden;
-                position: relative;
-            }
-
-            .card-badge {
-                position: absolute;
-                top: 12px;
-                left: 12px;
-                padding: 0.25rem 0.75rem;
-                border-radius: 20px;
-                font-size: 0.7rem;
-                font-weight: 600;
-            }
-
-            .badge-promo {
-                background: #fef3c7;
-                color: #d97706;
-            }
-
-            .badge-news {
-                background: #dbeafe;
-                color: #2563eb;
-            }
-
-            .badge-info {
-                background: #e0e7ff;
-                color: #4f46e5;
-            }
-
-            .badge-warning {
-                background: #fee2e2;
-                color: #dc2626;
-            }
-
-            .card-content {
-                padding: 1rem;
-            }
-
-            .card-title {
-                font-size: 1rem;
-                font-weight: 700;
-                margin-bottom: 0.5rem;
-            }
-
-            .card-desc {
-                font-size: 0.8rem;
-                color: #64748b;
-                margin-bottom: 0.75rem;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-
-            .card-date {
-                font-size: 0.7rem;
-                color: #94a3b8;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .readmore-link {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                font-size: 0.75rem;
-                font-weight: 600;
-                color: #2563eb;
-                transition: all 0.3s ease;
-                background: transparent;
-                border: none;
-                cursor: pointer;
-                padding: 0;
-            }
-
-            .readmore-link:hover {
-                color: #1d4ed8;
-                gap: 0.75rem;
-            }
-
-            .readmore-link i {
-                font-size: 0.7rem;
-                transition: transform 0.3s ease;
-            }
-
-            .readmore-link:hover i {
-                transform: translateX(3px);
-            }
-
-            .tab-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 1.5rem;
-                padding: 0 1rem;
-            }
-
-            .tab-header h2 {
-                font-size: 1.25rem;
-                font-weight: 700;
-                color: #1e293b;
-            }
-
-            .tab-header-link {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                font-size: 0.85rem;
-                font-weight: 600;
-                color: #2563eb;
-                text-decoration: none;
-                transition: all 0.3s ease;
-            }
-
-            .tab-header-link:hover {
-                color: #1d4ed8;
-                gap: 0.75rem;
-            }
-
-            /* Products */
-            .products-container {
-                width: 100%;
-                position: relative;
-                z-index: 2;
-                background: linear-gradient(to bottom, #ffffff, #f8fafc);
-            }
-
-            .products-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0;
-                width: 100%;
-                margin: 0;
-            }
-
-            .product-card {
-                transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-                border-radius: 0;
-                position: relative;
-                z-index: 1;
-            }
-
-            .product-card:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
-                z-index: 10;
-                background: white;
-            }
-
-            .product-icon {
-                transition: all 0.3s ease;
-            }
-
-            .product-card:hover .product-icon {
-                transform: scale(1.05);
-            }
-
-            .product-button {
-                transition: all 0.3s ease;
-            }
-
-            .product-button:hover {
-                background: #2563eb;
-                color: white;
-                transform: translateY(-2px);
-            }
-
-            .product-card:not(:last-child) {
-                border-right: 1px solid #e2e8f0;
-            }
-
-            /* ==================== */
-            /* ABOUT SECTION - FULL WIDTH DI BAWAH */
-            /* ==================== */
-            .about-full-section {
-                width: 100%;
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-                position: relative;
-                overflow: hidden;
-            }
-
-            .about-full-container {
-                max-width: 1400px;
-                margin: 0 auto;
-                display: flex;
-                align-items: center;
-                gap: 0;
-            }
-
-            .about-full-content {
-                flex: 1;
-                padding: 4rem 3rem;
-                color: white;
-            }
-
-            .about-full-title {
-                font-size: 2.5rem;
-                font-weight: 700;
-                color: white;
-                line-height: 1.3;
-                margin-bottom: 1.5rem;
-            }
-
-            .about-full-title span {
-                color: #60a5fa;
-                position: relative;
-            }
-
-            .about-full-title span::after {
-                content: '';
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                width: 100%;
-                height: 3px;
-                background: linear-gradient(90deg, #60a5fa, #3b82f6);
-                border-radius: 3px;
-            }
-
-            .about-full-description {
-                color: #cbd5e1;
-                font-size: 1rem;
-                line-height: 1.7;
-                margin-bottom: 2rem;
-            }
-
-            .about-full-features {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.25rem;
-                margin-bottom: 2rem;
-            }
-
-            .about-full-feature {
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-            }
-
-            .feature-full-icon {
-                width: 44px;
-                height: 44px;
-                background: rgba(59, 130, 246, 0.15);
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #60a5fa;
-                font-size: 1.2rem;
-                transition: all 0.3s ease;
-            }
-
-            .about-full-feature:hover .feature-full-icon {
-                background: #3b82f6;
-                color: white;
-                transform: scale(1.05);
-            }
-
-            .feature-full-text h4 {
-                font-size: 1rem;
-                font-weight: 700;
-                color: white;
-                margin-bottom: 0.25rem;
-            }
-
-            .feature-full-text p {
-                font-size: 0.8rem;
-                color: #94a3b8;
-            }
-
-            .about-full-cta {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.75rem;
-                padding: 0.9rem 2rem;
-                background: linear-gradient(135deg, #3b82f6, #2563eb);
-                color: white;
-                font-weight: 600;
-                border-radius: 50px;
-                text-decoration: none;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            }
-
-            .about-full-cta:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-                gap: 1rem;
-            }
-
-            .about-full-image {
-                flex: 1;
-                position: relative;
-                min-height: 550px;
-                overflow: hidden;
-            }
-
-            .about-full-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-
-            .image-overlay-stats {
-                position: absolute;
-                bottom: 40px;
-                right: 40px;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                padding: 1.25rem 1.75rem;
-                border-radius: 1rem;
-                box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
-                z-index: 10;
-                display: flex;
-                align-items: center;
-                gap: 1.5rem;
-            }
-
-            .stat-item {
-                text-align: center;
-            }
-
-            .stat-number {
-                font-size: 1.8rem;
-                font-weight: 800;
-                color: #1e293b;
-                line-height: 1;
-            }
-
-            .stat-number span {
-                font-size: 1rem;
-                font-weight: 500;
-                color: #64748b;
-            }
-
-            .stat-label {
-                font-size: 0.7rem;
-                color: #64748b;
-                font-weight: 500;
-                margin-top: 0.25rem;
-            }
-
-            .stat-divider {
-                width: 1px;
-                height: 40px;
-                background: #e2e8f0;
-            }
-
-            /* ==================== */
-            /* PARTNERS / KERJASAMA SECTION - MARQUEE */
-            /* ==================== */
-            .partners-section {
-                width: 100%;
-                background: white;
-                padding: 3rem 0;
-                overflow: hidden;
-                border-top: 1px solid #e2e8f0;
-                border-bottom: 1px solid #e2e8f0;
-            }
-
-            .partners-header {
-                text-align: center;
-                margin-bottom: 2rem;
-            }
-
-            .partners-title {
-                font-size: 1.5rem;
-                font-weight: 700;
-                color: #1e293b;
-                margin-bottom: 0.5rem;
-            }
-
-            .partners-subtitle {
-                font-size: 0.9rem;
-                color: #64748b;
-            }
-
-            /* Marquee Animation */
-            .marquee-container {
-                width: 100%;
-                overflow: hidden;
-                position: relative;
-            }
-
-            .marquee-track {
-                display: flex;
-                align-items: center;
-                gap: 4rem;
-                animation: marquee 25s linear infinite;
-                width: max-content;
-            }
-
-            .marquee-track:hover {
-                animation-play-state: paused;
-            }
-
             @keyframes marquee {
                 0% {
                     transform: translateX(0);
@@ -684,175 +74,33 @@
                 }
             }
 
-            .partner-logo {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                min-width: 140px;
-                padding: 1rem;
-                transition: all 0.3s ease;
-                opacity: 0.7;
+            .animate-marquee {
+                animation: marquee 25s linear infinite;
             }
 
-            .partner-logo:hover {
-                opacity: 1;
-                transform: scale(1.05);
+            .animate-marquee:hover {
+                animation-play-state: paused;
             }
 
-            .partner-logo img {
-                height: 60px;
-                width: auto;
-                object-fit: contain;
-                filter: grayscale(100%);
-                transition: filter 0.3s ease;
-            }
-
-            .partner-logo:hover img {
-                filter: grayscale(0%);
-            }
-
-            .partner-name {
-                font-size: 0.7rem;
-                color: #94a3b8;
-                margin-top: 0.5rem;
-                text-align: center;
-            }
-
-            /* Responsive */
-            @media (max-width: 1024px) {
-                .about-full-container {
-                    flex-direction: column;
-                }
-
-                .about-full-content {
-                    padding: 3rem 2rem;
-                }
-
-                .about-full-image {
-                    width: 100%;
-                    min-height: 400px;
-                }
-
-                .about-full-image img {
-                    position: relative;
-                    height: 400px;
-                    object-fit: cover;
-                }
-
-                .info-grid {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-            }
-
-            @media (max-width: 768px) {
-                .hero-carousel {
-                    height: 65vh;
-                    border-radius: 0 0 0 80px;
-                }
-
-                .carousel-logo {
-                    bottom: 20px;
-                    left: 20px;
-                    padding: 6px 16px;
-                }
-
-                .carousel-logo img {
-                    height: 28px;
-                }
-
-                .products-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .product-card:not(:last-child) {
-                    border-right: none;
-                    border-bottom: 1px solid #e2e8f0;
-                }
-
-                .about-full-features {
-                    grid-template-columns: 1fr;
-                }
-
-                .about-full-title {
-                    font-size: 1.8rem;
-                }
-
-                .image-overlay-stats {
-                    bottom: 20px;
-                    right: 20px;
-                    left: 20px;
-                    padding: 1rem;
-                    gap: 1rem;
-                }
-
-                .stat-number {
-                    font-size: 1.3rem;
-                }
-
-                .tab-btn {
-                    padding: 0.5rem 1rem;
-                    font-size: 0.75rem;
-                }
-
-                .info-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .partner-logo {
-                    min-width: 100px;
-                }
-
-                .partner-logo img {
-                    height: 40px;
-                }
-
-                .marquee-track {
-                    gap: 2rem;
-                    animation-duration: 20s;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .hero-carousel {
-                    height: 60vh;
-                    border-radius: 0 0 0 50px;
-                }
-
-                .carousel-logo span {
-                    display: none;
-                }
-
-                .image-overlay-stats {
-                    flex-direction: column;
-                    gap: 0.75rem;
-                    text-align: center;
-                }
-
-                .stat-divider {
-                    display: none;
-                }
-
-                .partners-title {
-                    font-size: 1.2rem;
-                }
+            .card-desc {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
             }
         </style>
     @endpush
 
 @section('content')
     <!-- Hero Carousel Section -->
-    <section id="home" class="hero-carousel relative w-full bg-slate-900">
+    <section id="home"
+        class="hero-carousel relative w-full bg-slate-900 h-[75vh] min-h-[550px] overflow-hidden shadow-2xl z-1">
         <div class="carousel-curve-container">
             <div class="carousel-curve-glow"></div>
             <div class="carousel-curve-white"></div>
             <div class="carousel-curve-gradient"></div>
         </div>
-        <div class="carousel-overlay"></div>
-        <div class="carousel-logo">
-            <img src="{{ asset('assets/logo4.png') }}" alt="FinBank Logo">
-            <span>FinBank</span>
-        </div>
+        <div class="absolute inset-0 bg-gradient-to-br from-black/55 via-black/35 to-black/20 z-10"></div>
 
         <div class="carousel-slide absolute top-0 left-0 w-full h-full opacity-0" data-slide="0">
             <img src="{{ asset('assets/test0.jpg') }}" alt="Slide 1"
@@ -872,34 +120,38 @@
         </div>
 
         <button
-            class="carousel-nav-btn prev absolute top-1/2 -translate-y-1/2 left-5 md:left-8 w-11 h-11 md:w-12 md:h-12 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/25 transition-all duration-300 hover:bg-white/35 hover:scale-110"
+            class="carousel-nav-btn prev absolute top-1/2 -translate-y-1/2 left-5 md:left-8 w-11 h-11 md:w-12 md:h-12 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/25 transition-all duration-300 hover:bg-white/35 hover:scale-110 z-30"
             id="prevBtn">
             <i class="fas fa-chevron-left text-white text-sm md:text-base"></i>
         </button>
         <button
-            class="carousel-nav-btn next absolute top-1/2 -translate-y-1/2 right-5 md:right-8 w-11 h-11 md:w-12 md:h-12 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/25 transition-all duration-300 hover:bg-white/35 hover:scale-110"
+            class="carousel-nav-btn next absolute top-1/2 -translate-y-1/2 right-5 md:right-8 w-11 h-11 md:w-12 md:h-12 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/25 transition-all duration-300 hover:bg-white/35 hover:scale-110 z-30"
             id="nextBtn">
             <i class="fas fa-chevron-right text-white text-sm md:text-base"></i>
         </button>
 
-        <div class="carousel-dots absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30"
-            id="carouselDots">
-            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="0"></div>
-            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="1"></div>
-            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="2"></div>
-            <div class="dot w-2 h-2 rounded-full bg-white/50" data-slide="3"></div>
+        <div class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-30" id="carouselDots">
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 cursor-pointer" data-slide="0">
+            </div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 cursor-pointer" data-slide="1">
+            </div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 cursor-pointer" data-slide="2">
+            </div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 cursor-pointer" data-slide="3">
+            </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <div class="products-container">
-        <div class="products-grid">
-            <div class="product-card bg-white transition-all duration-300 group overflow-hidden flex flex-col cursor-pointer"
+    <div class="w-full relative z-2 bg-gradient-to-b from-white to-slate-50">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-0 w-full">
+            <!-- Product Card 1 -->
+            <div class="bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:z-10 border-r border-slate-200 cursor-pointer"
                 onclick="showProductDetail('kredit')">
-                <div class="flex items-center p-6 md:p-8 gap-5 flex-1">
+                <div class="flex items-center p-6 md:p-8 gap-5">
                     <div class="flex-shrink-0">
                         <div
-                            class="product-icon w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
+                            class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300">
                             <i class="fas fa-credit-card text-white text-2xl md:text-3xl"></i>
                         </div>
                     </div>
@@ -917,20 +169,21 @@
                 </div>
                 <div class="px-6 md:px-8 pb-6 md:pb-8 pt-2">
                     <button
-                        class="product-button w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group/btn">
+                        class="w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group">
                         Pelajari Selengkapnya
                         <i
-                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                     </button>
                 </div>
             </div>
 
-            <div class="product-card bg-white transition-all duration-300 group overflow-hidden flex flex-col cursor-pointer"
+            <!-- Product Card 2 -->
+            <div class="bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:z-10 border-r border-slate-200 cursor-pointer"
                 onclick="showProductDetail('dana')">
-                <div class="flex items-center p-6 md:p-8 gap-5 flex-1">
+                <div class="flex items-center p-6 md:p-8 gap-5">
                     <div class="flex-shrink-0">
                         <div
-                            class="product-icon w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
+                            class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300">
                             <i class="fas fa-hand-holding-usd text-white text-2xl md:text-3xl"></i>
                         </div>
                     </div>
@@ -948,20 +201,21 @@
                 </div>
                 <div class="px-6 md:px-8 pb-6 md:pb-8 pt-2">
                     <button
-                        class="product-button w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group/btn">
+                        class="w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group">
                         Pelajari Selengkapnya
                         <i
-                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                     </button>
                 </div>
             </div>
 
-            <div class="product-card bg-white transition-all duration-300 group overflow-hidden flex flex-col cursor-pointer"
+            <!-- Product Card 3 -->
+            <div class="bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:z-10 cursor-pointer"
                 onclick="showProductDetail('atm')">
-                <div class="flex items-center p-6 md:p-8 gap-5 flex-1">
+                <div class="flex items-center p-6 md:p-8 gap-5">
                     <div class="flex-shrink-0">
                         <div
-                            class="product-icon w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
+                            class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center shadow-md transition-all duration-300">
                             <i class="fas fa-credit-card text-white text-2xl md:text-3xl"></i>
                         </div>
                     </div>
@@ -979,17 +233,17 @@
                 </div>
                 <div class="px-6 md:px-8 pb-6 md:pb-8 pt-2">
                     <button
-                        class="product-button w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group/btn">
+                        class="w-full py-3 bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white rounded-xl transition-all duration-300 text-base font-semibold flex items-center justify-center gap-2 group">
                         Pelajari Selengkapnya
                         <i
-                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+                            class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- INFO SECTION (Promosi, Berita, Pemberitahuan, Waspada) -->
+    <!-- INFO SECTION -->
     @php
         $categories = [
             [
@@ -997,32 +251,48 @@
                 'name' => 'Promosi',
                 'slug' => 'promo',
                 'icon' => 'fa-gift',
-                'badge_class' => 'badge-promo',
+                'badge_class' => 'bg-amber-100 text-amber-700',
                 'color' => 'promo',
+                'bg_active' => '#d97706',
+                'bg_default' => '#fffbeb',
+                'text_default' => '#d97706',
+                'hover_bg' => '#f59e0b',
             ],
             [
                 'id' => 2,
                 'name' => 'Berita',
                 'slug' => 'berita',
                 'icon' => 'fa-newspaper',
-                'badge_class' => 'badge-news',
+                'badge_class' => 'bg-blue-100 text-blue-700',
                 'color' => 'berita',
+                'bg_active' => '#2563eb',
+                'bg_default' => '#eff6ff',
+                'text_default' => '#2563eb',
+                'hover_bg' => '#3b82f6',
             ],
             [
                 'id' => 3,
                 'name' => 'Pemberitahuan',
                 'slug' => 'pemberitahuan',
                 'icon' => 'fa-bell',
-                'badge_class' => 'badge-info',
+                'badge_class' => 'bg-indigo-100 text-indigo-700',
                 'color' => 'pemberitahuan',
+                'bg_active' => '#4f46e5',
+                'bg_default' => '#eef2ff',
+                'text_default' => '#4f46e5',
+                'hover_bg' => '#6366f1',
             ],
             [
                 'id' => 4,
                 'name' => 'Waspada',
                 'slug' => 'waspada',
                 'icon' => 'fa-shield-alt',
-                'badge_class' => 'badge-warning',
+                'badge_class' => 'bg-red-100 text-red-700',
                 'color' => 'waspada',
+                'bg_active' => '#dc2626',
+                'bg_default' => '#fef2f2',
+                'text_default' => '#dc2626',
+                'hover_bg' => '#ef4444',
             ],
         ];
 
@@ -1166,40 +436,51 @@
         ];
     @endphp
 
-    <div class="info-section">
-        <div class="tab-buttons">
+    <div class="w-full bg-gradient-to-b from-slate-50 to-slate-100 py-8 pb-12">
+        <div class="flex flex-wrap justify-center gap-3 mb-8 px-4">
             @foreach ($categories as $index => $cat)
-                <button class="tab-btn {{ $cat['color'] }} {{ $loop->first ? 'active' : '' }}"
-                    data-tab="{{ $cat['slug'] }}">
+                <button
+                    class="tab-btn px-5 py-2.5 md:px-7 md:py-3 text-sm md:text-base font-semibold border-none cursor-pointer transition-all duration-300 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 {{ $loop->first ? 'active' : '' }}"
+                    data-tab="{{ $cat['slug'] }}" data-default-bg="{{ $cat['bg_default'] }}"
+                    data-default-text="{{ $cat['text_default'] }}" data-hover-bg="{{ $cat['hover_bg'] }}"
+                    data-active-bg="{{ $cat['bg_active'] }}"
+                    style="background-color: {{ $loop->first ? $cat['bg_active'] : $cat['bg_default'] }}; color: {{ $loop->first ? 'white' : $cat['text_default'] }};">
                     <i class="fas {{ $cat['icon'] }} mr-2"></i> {{ $cat['name'] }}
                 </button>
             @endforeach
         </div>
 
         @foreach ($categories as $index => $cat)
-            <div class="tab-content {{ $loop->first ? 'active' : '' }}" id="tab-{{ $cat['slug'] }}">
-                <div class="tab-header">
-                    <h2>{{ $cat['name'] }} Terbaru</h2>
-                    <a href="{{ url('/' . $cat['slug']) }}" class="tab-header-link">
-                        Lihat Semua {{ $cat['name'] }} <i class="fas fa-arrow-right"></i>
+            <div class="tab-content {{ $loop->first ? 'active' : 'hidden' }}" id="tab-{{ $cat['slug'] }}">
+                <div class="flex justify-between items-center mb-6 px-4">
+                    <h2 class="text-xl font-bold text-slate-800">{{ $cat['name'] }} Terbaru</h2>
+                    <a href="{{ url('/' . $cat['slug']) }}"
+                        class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 hover:gap-3">
+                        Lihat Semua {{ $cat['name'] }} <i class="fas fa-arrow-right text-xs"></i>
                     </a>
                 </div>
-                <div class="info-grid">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
                     @foreach ($items[$cat['id']] as $item)
-                        <div class="info-card" onclick="goToDetail('{{ $cat['slug'] }}', {{ $item['id'] }})">
-                            <div class="image-container">
-                                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="card-image">
-                                <span class="card-badge {{ $cat['badge_class'] }}">
+                        <div class="bg-white rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl cursor-pointer border border-slate-200 group"
+                            onclick="goToDetail('{{ $cat['slug'] }}', {{ $item['id'] }})">
+                            <div class="relative overflow-hidden">
+                                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}"
+                                    class="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105">
+                                <span
+                                    class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold {{ $cat['badge_class'] }}">
                                     <i class="fas {{ $cat['icon'] }} mr-1"></i> {{ $item['badge'] }}
                                 </span>
                             </div>
-                            <div class="card-content">
-                                <h3 class="card-title">{{ $item['title'] }}</h3>
-                                <p class="card-desc">{{ $item['desc'] }}</p>
-                                <div class="card-date"><i class="far fa-calendar-alt"></i> {{ $item['date'] }}</div>
-                                <button class="readmore-link"
+                            <div class="p-4">
+                                <h3 class="font-bold text-base mb-2">{{ $item['title'] }}</h3>
+                                <p class="text-sm text-slate-500 mb-3 card-desc">{{ $item['desc'] }}</p>
+                                <div class="text-xs text-slate-400 flex items-center gap-2 mb-3">
+                                    <i class="far fa-calendar-alt"></i> {{ $item['date'] }}
+                                </div>
+                                <button
+                                    class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-all duration-300 bg-transparent border-none cursor-pointer p-0 hover:gap-3"
                                     onclick="event.stopPropagation(); goToDetail('{{ $cat['slug'] }}', {{ $item['id'] }})">
-                                    Selengkapnya <i class="fas fa-arrow-right"></i>
+                                    Selengkapnya <i class="fas fa-arrow-right text-xs"></i>
                                 </button>
                             </div>
                         </div>
@@ -1209,203 +490,158 @@
         @endforeach
     </div>
 
-    <!-- ABOUT SECTION - FULL WIDTH -->
-    <div class="about-full-section">
-        <div class="about-full-container">
-            <div class="about-full-content">
-                <h2 class="about-full-title">
-                    Solusi Keuangan Digital<br>Untuk <span>Masa Depan Anda</span>
+    <!-- ABOUT SECTION -->
+    <div class="w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        <div class="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center">
+            <div class="flex-1 p-8 md:p-12 text-white">
+                <h2 class="text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
+                    Solusi Keuangan Digital<br>Untuk <span class="text-blue-400 relative inline-block">Masa Depan Anda<span
+                            class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></span></span>
                 </h2>
-                <p class="about-full-description">
+                <p class="text-slate-300 text-base leading-relaxed mb-8">
                     FinBank hadir sebagai solusi perbankan digital terdepan yang menggabungkan teknologi modern
                     dengan pelayanan prima. Kami berkomitmen untuk memberikan kemudahan akses keuangan bagi
                     seluruh lapisan masyarakat Indonesia.
                 </p>
 
-                <div class="about-full-features">
-                    <div class="about-full-feature">
-                        <div class="feature-full-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="feature-full-text">
-                            <h4>Keamanan Terjamin</h4>
-                            <p>Sistem enkripsi berlapis & proteksi 24 jam</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                    <div class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 bg-blue-500/15 rounded-xl flex items-center justify-center text-blue-400 text-lg transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base">Keamanan Terjamin</h4>
+                            <p class="text-sm text-slate-400">Sistem enkripsi berlapis & proteksi 24 jam</p>
                         </div>
                     </div>
-                    <div class="about-full-feature">
-                        <div class="feature-full-icon"><i class="fas fa-clock"></i></div>
-                        <div class="feature-full-text">
-                            <h4>Layanan 24/7</h4>
-                            <p>Akses transaksi kapan saja, di mana saja</p>
+                    <div class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 bg-blue-500/15 rounded-xl flex items-center justify-center text-blue-400 text-lg transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base">Layanan 24/7</h4>
+                            <p class="text-sm text-slate-400">Akses transaksi kapan saja, di mana saja</p>
                         </div>
                     </div>
-                    <div class="about-full-feature">
-                        <div class="feature-full-icon"><i class="fas fa-mobile-alt"></i></div>
-                        <div class="feature-full-text">
-                            <h4>Fitur Digital Lengkap</h4>
-                            <p>Mobile banking & internet banking canggih</p>
+                    <div class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 bg-blue-500/15 rounded-xl flex items-center justify-center text-blue-400 text-lg transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base">Fitur Digital Lengkap</h4>
+                            <p class="text-sm text-slate-400">Mobile banking & internet banking canggih</p>
                         </div>
                     </div>
-                    <div class="about-full-feature">
-                        <div class="feature-full-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                        <div class="feature-full-text">
-                            <h4>Bunga Kompetitif</h4>
-                            <p>Produk simpanan & kredit terbaik</p>
+                    <div class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 bg-blue-500/15 rounded-xl flex items-center justify-center text-blue-400 text-lg transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base">Bunga Kompetitif</h4>
+                            <p class="text-sm text-slate-400">Produk simpanan & kredit terbaik</p>
                         </div>
                     </div>
-                    <div class="about-full-feature">
-                        <div class="feature-full-icon"><i class="fas fa-users"></i></div>
-                        <div class="feature-full-text">
-                            <h4>5+ Juta Nasabah</h4>
-                            <p>Dipercaya oleh jutaan masyarakat Indonesia</p>
+                    <div class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 bg-blue-500/15 rounded-xl flex items-center justify-center text-blue-400 text-lg transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base">5+ Juta Nasabah</h4>
+                            <p class="text-sm text-slate-400">Dipercaya oleh jutaan masyarakat Indonesia</p>
                         </div>
                     </div>
-                    <div class="about-full-feature">
-                        <div class="feature-full-icon"><i class="fas fa-certificate"></i></div>
-                        <div class="feature-full-text">
-                            <h4>Terlisensi & Terdaftar</h4>
-                            <p>Resmi & diawasi oleh OJK</p>
+                    <div class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 bg-blue-500/15 rounded-xl flex items-center justify-center text-blue-400 text-lg transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-base">Terlisensi & Terdaftar</h4>
+                            <p class="text-sm text-slate-400">Resmi & diawasi oleh OJK</p>
                         </div>
                     </div>
                 </div>
 
-                <a href="#" class="about-full-cta">
+                <a href="#"
+                    class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/40 hover:gap-4">
                     Selengkapnya Tentang FinBank
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
 
-            <div class="about-full-image">
+            <div class="flex-1 relative min-h-[400px] lg:min-h-[550px] w-full">
                 <img src="https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                    alt="FinBank Modern Office">
-                <div class="image-overlay-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">10+ <span>Tahun</span></div>
-                        <div class="stat-label">Pengalaman</div>
+                    alt="FinBank Modern Office" class="w-full h-full object-cover absolute top-0 left-0">
+                <div
+                    class="absolute bottom-4 right-4 md:bottom-10 md:right-10 bg-white/95 backdrop-blur-md p-4 md:p-5 rounded-xl shadow-2xl z-10 flex flex-col sm:flex-row items-center gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-extrabold text-slate-800">10+ <span
+                                class="text-base font-medium text-slate-500">Tahun</span></div>
+                        <div class="text-xs text-slate-500 font-medium">Pengalaman</div>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Kantor Cabang</div>
+                    <div class="hidden sm:block w-px h-10 bg-slate-200"></div>
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-extrabold text-slate-800">500+</div>
+                        <div class="text-xs text-slate-500 font-medium">Kantor Cabang</div>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-number">5M+</div>
-                        <div class="stat-label">Nasabah</div>
+                    <div class="hidden sm:block w-px h-10 bg-slate-200"></div>
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-extrabold text-slate-800">5M+</div>
+                        <div class="text-xs text-slate-500 font-medium">Nasabah</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- PARTNERS / KERJASAMA SECTION - MARQUEE BERJALAN -->
-    <div class="partners-section">
-        <div class="partners-header">
-            <h3 class="partners-title">🤝 Mitra Kerjasama FinBank</h3>
-            <p class="partners-subtitle">Bergabung dengan lebih dari 500+ perusahaan terpercaya</p>
-        </div>
+        <!-- MITRA KERJA SAMA - VERSI PREMIUM DENGAN LOGO LEBIH BESAR (TANPA NAMA) -->
+        <div
+            class="w-full overflow-hidden relative py-10 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-2xl my-8 border border-white/10">
+            <!-- Decorative background elements -->
+            <div class="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-blue-500/5 to-purple-500/5 blur-3xl">
+            </div>
 
-        <div class="marquee-container">
-            <div class="marquee-track">
-                <!-- Logo 1 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Logo_Pertamina.svg/2560px-Logo_Pertamina.svg.png"
-                        alt="Pertamina">
-                    <span class="partner-name">Pertamina</span>
-                </div>
-                <!-- Logo 2 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Logo_Telkom_Indonesia.svg/2560px-Logo_Telkom_Indonesia.svg.png"
-                        alt="Telkom Indonesia">
-                    <span class="partner-name">Telkom Indonesia</span>
-                </div>
-                <!-- Logo 3 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Logo_PLN.svg/2560px-Logo_PLN.svg.png"
-                        alt="PLN">
-                    <span class="partner-name">PLN</span>
-                </div>
-                <!-- Logo 4 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bank_Mandiri_logo.svg/2560px-Bank_Mandiri_logo.svg.png"
-                        alt="Bank Mandiri">
-                    <span class="partner-name">Bank Mandiri</span>
-                </div>
-                <!-- Logo 5 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BRI_logo.svg/2560px-BRI_logo.svg.png"
-                        alt="BRI">
-                    <span class="partner-name">BRI</span>
-                </div>
-                <!-- Logo 6 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Gojek_logo_2019.svg/2560px-Gojek_logo_2019.svg.png"
-                        alt="Gojek">
-                    <span class="partner-name">Gojek</span>
-                </div>
-                <!-- Logo 7 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Grab_logo.svg/2560px-Grab_logo.svg.png"
-                        alt="Grab">
-                    <span class="partner-name">Grab</span>
-                </div>
-                <!-- Logo 8 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Shopee_logo.svg/2560px-Shopee_logo.svg.png"
-                        alt="Shopee">
-                    <span class="partner-name">Shopee</span>
-                </div>
-                <!-- Logo 9 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Logo_Unilever.svg/2560px-Logo_Unilever.svg.png"
-                        alt="Unilever">
-                    <span class="partner-name">Unilever</span>
-                </div>
-                <!-- Logo 10 -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Astra_International_logo.svg/2560px-Astra_International_logo.svg.png"
-                        alt="Astra">
-                    <span class="partner-name">Astra</span>
+            <div class="relative z-10">
+                <!-- Header with icon -->
+                <div class="text-center mb-8">
+                    <h1 class="text-2xl md:text-4xl font-bold text-white mb-2">
+                        Mitra Kerja Sama <span
+                            class="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">FinBank</span>
+                    </h1>
+                    <p class="text-slate-400 text-sm">Bergabung dengan mitra terpercaya</p>
                 </div>
 
-                <!-- Duplikasi untuk efek infinite -->
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Logo_Pertamina.svg/2560px-Logo_Pertamina.svg.png"
-                        alt="Pertamina">
-                    <span class="partner-name">Pertamina</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Logo_Telkom_Indonesia.svg/2560px-Logo_Telkom_Indonesia.svg.png"
-                        alt="Telkom Indonesia">
-                    <span class="partner-name">Telkom Indonesia</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Logo_PLN.svg/2560px-Logo_PLN.svg.png"
-                        alt="PLN">
-                    <span class="partner-name">PLN</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bank_Mandiri_logo.svg/2560px-Bank_Mandiri_logo.svg.png"
-                        alt="Bank Mandiri">
-                    <span class="partner-name">Bank Mandiri</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/BRI_logo.svg/2560px-BRI_logo.svg.png"
-                        alt="BRI">
-                    <span class="partner-name">BRI</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Gojek_logo_2019.svg/2560px-Gojek_logo_2019.svg.png"
-                        alt="Gojek">
-                    <span class="partner-name">Gojek</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Grab_logo.svg/2560px-Grab_logo.svg.png"
-                        alt="Grab">
-                    <span class="partner-name">Grab</span>
-                </div>
-                <div class="partner-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Shopee_logo.svg/2560px-Shopee_logo.svg.png"
-                        alt="Shopee">
-                    <span class="partner-name">Shopee</span>
+                <!-- Marquee / Running text mitra dengan background putih dan logo besar (tanpa nama) -->
+                <div class="w-full overflow-hidden relative">
+                    <div class="flex items-center gap-10 animate-marquee w-max">
+                        @for ($i = 1; $i <= 24; $i++)
+                            @php
+                                $ext = $i >= 12 && $i <= 15 ? 'jpg' : 'png';
+                            @endphp
+                            <div
+                                class="flex items-center justify-center min-w-[130px] md:min-w-[160px] p-5 bg-white rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1 border border-slate-100">
+                                <img src="{{ asset('assets/' . $i . '.' . $ext) }}" alt="Mitra {{ $i }}"
+                                    class="h-16 md:h-24 w-auto object-contain">
+                            </div>
+                        @endfor
+                        @for ($i = 1; $i <= 24; $i++)
+                            @php
+                                $ext = $i >= 12 && $i <= 15 ? 'jpg' : 'png';
+                            @endphp
+                            <div
+                                class="flex items-center justify-center min-w-[130px] md:min-w-[160px] p-5 bg-white rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1 border border-slate-100">
+                                <img src="{{ asset('assets/' . $i . '.' . $ext) }}" alt="Mitra {{ $i }}"
+                                    class="h-16 md:h-24 w-auto object-contain">
+                            </div>
+                        @endfor
+                    </div>
                 </div>
             </div>
         </div>
@@ -1479,17 +715,113 @@
             window.location.href = '/' + category + '/' + id;
         }
 
+        // Tab navigation with improved hover and active states
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
+
+        // Store original styles for each button
+        tabBtns.forEach(btn => {
+            const defaultBg = btn.getAttribute('data-default-bg');
+            const defaultText = btn.getAttribute('data-default-text');
+            const hoverBg = btn.getAttribute('data-hover-bg');
+
+            // Store data attributes
+            btn.defaultBg = defaultBg;
+            btn.defaultText = defaultText;
+            btn.hoverBg = hoverBg;
+
+            // Add hover event listeners
+            btn.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.backgroundColor = this.hoverBg;
+                    this.style.color = 'white';
+                }
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.backgroundColor = this.defaultBg;
+                    this.style.color = this.defaultText;
+                }
+            });
+        });
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const tabId = btn.getAttribute('data-tab');
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
+                const activeBg = btn.getAttribute('data-active-bg');
+
+                // Reset all buttons to default style
+                tabBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.style.backgroundColor = b.defaultBg;
+                    b.style.color = b.defaultText;
+                });
+
+                // Hide all tab contents
+                tabContents.forEach(c => {
+                    c.classList.add('hidden');
+                    c.classList.remove('active');
+                });
+
+                // Set active style for clicked button
                 btn.classList.add('active');
-                document.getElementById(`tab-${tabId}`).classList.add('active');
+                btn.style.backgroundColor = activeBg;
+                btn.style.color = 'white';
+
+                // Show selected tab content
+                const activeTab = document.getElementById(`tab-${tabId}`);
+                activeTab.classList.remove('hidden');
+                activeTab.classList.add('active');
             });
+        });
+
+        // Set initial active tab style - Pastikan tab Promosi aktif saat load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cari tab yang memiliki class active (Promosi)
+            const activeTabBtn = document.querySelector('.tab-btn.active');
+
+            if (activeTabBtn) {
+                const activeBg = activeTabBtn.getAttribute('data-active-bg');
+                const activeTabId = activeTabBtn.getAttribute('data-tab');
+
+                // Set style untuk tombol aktif
+                activeTabBtn.style.backgroundColor = activeBg;
+                activeTabBtn.style.color = 'white';
+
+                // Sembunyikan semua tab content terlebih dahulu
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+
+                // Tampilkan tab content yang aktif
+                const activeTabContent = document.getElementById(`tab-${activeTabId}`);
+                if (activeTabContent) {
+                    activeTabContent.classList.remove('hidden');
+                    activeTabContent.classList.add('active');
+                }
+            } else if (tabBtns.length > 0) {
+                // Fallback: aktifkan tab pertama (Promosi)
+                const firstBtn = tabBtns[0];
+                const firstActiveBg = firstBtn.getAttribute('data-active-bg');
+                const firstTabId = firstBtn.getAttribute('data-tab');
+
+                firstBtn.classList.add('active');
+                firstBtn.style.backgroundColor = firstActiveBg;
+                firstBtn.style.color = 'white';
+
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+
+                const firstTabContent = document.getElementById(`tab-${firstTabId}`);
+                if (firstTabContent) {
+                    firstTabContent.classList.remove('hidden');
+                    firstTabContent.classList.add('active');
+                }
+            }
         });
 
         if (nextBtn && prevBtn) {
